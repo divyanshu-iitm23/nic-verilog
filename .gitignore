@@ -1,0 +1,4 @@
+sim/*.out
+sim/*.vcd
+sim/*.log
+*.vvp
