@@ -201,21 +201,3 @@
   ```
 
 ---
-
-## 8. Explicit Non-Goals for v0.1
-
-Documenting these so scope doesn't silently creep mid-implementation:
-- No TX path (RX-only, per earlier scope decision)
-- No real PHY/SerDes modeling — `phy_data` is a byte-level stub
-- No PCIe or real host-memory DMA — `rx_descriptor_ring`'s "software" side is a testbench driver, not a real bus
-- No CDC / multi-clock-domain support
-- No VLAN tag handling (assume untagged Ethernet frames)
-- No IPv6 (IPv4 only, ethertype `0x0800` only)
-- No TCP (UDP only, protocol `17` only — this is a market-data NIC, not a general-purpose one)
-
----
-
-## 9. Open Decisions (resolve before or during `udp_classifier` implementation)
-
-- [ ] Should `cfg_*` table writes be exposed via the integration testbench only, or does it matter that this doc pretends there's a "control plane"? (Recommendation: testbench-driven `cfg_*` writes are fine for sim-only scope — don't over-build a config bus.)
-- [ ] Multicast MAC filtering (checking dest MAC is in the `01:00:5E:xx:xx:xx` multicast range) — currently classifier only checks IP/port, not MAC. Add if you want to model real multicast join behavior, otherwise note as a simplification.
